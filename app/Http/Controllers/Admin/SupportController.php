@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateSupportRequest;
 use App\Models\Support;
 use Illuminate\Http\Request;
 
@@ -15,11 +16,11 @@ class SupportController extends Controller
     public function create() {
         return view('admin.supports.create');
     }
-    public function store(Request $request) {
+    public function store(StoreUpdateSupportRequest $request) {
         Support::create($request->all());
         return to_route('supports.index');
     }
-    public function update(Request $request, int $id) {
+    public function update(StoreUpdateSupportRequest $request, int $id) {
         if(!$support = Support::find($id)) {
             return back();
         }
