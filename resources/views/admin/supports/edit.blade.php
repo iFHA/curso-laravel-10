@@ -1,12 +1,6 @@
 <h1>Editando Dúvida {{ $support->id }}</h1>
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $erro)
-            <li>{{ $erro }}</li>
-        @endforeach
-    </ul>
-@endif
+<x-alert/>
 
 <form action="{{ route('supports.update', $support->id) }}" method="POST">
     @method('PUT')

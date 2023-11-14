@@ -1,12 +1,6 @@
 <h1>Nova Dúvida</h1>
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $erro)
-            <li>{{ $erro }}</li>
-        @endforeach
-    </ul>
-@endif
+<x-alert/>
 
 <form action="{{ route('supports.store') }}" method="POST">
     @include("admin.supports.partials.form")
