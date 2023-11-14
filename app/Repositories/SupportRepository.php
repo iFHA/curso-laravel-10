@@ -7,6 +7,7 @@ use App\DTO\UpdateSupportDTO;
 use stdClass;
 
 interface SupportRepository {
+    public function paginate(int $page = 1, int $perPage = 15, string $filter = null): PaginationInterface;
     public function getAll(string $filter = null): array;
     public function getById(int $id): stdClass|null;
     public function create(CreateSupportDTO $data): stdClass;

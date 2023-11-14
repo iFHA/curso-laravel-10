@@ -43,4 +43,16 @@ class SupportEloquentORMRepository implements SupportRepository {
     public function delete(int $id): void {
         $this->model->findOrFail($id)->delete();
     }
+
+    public function paginate(int $page = 1, int $perPage = 15, $filter = null): PaginationInterface {
+        $result = $this->model
+                    ->where(function($query) use ($filter) {
+                        if($filter) {
+                            $query->where('subject', $filter);
+                            $query->orWhere('body', 'like','%'. $filter .'%');
+                        }
+                    })
+                    ->paginate($perPage, ['*'], 'page', $page);
+        return new PaginationPresenter($result);
+    }
 }

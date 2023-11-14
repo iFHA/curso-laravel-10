@@ -13,7 +13,11 @@ class SupportController extends Controller
 {
     public function __construct(private SupportService $service) {}
     public function index(Request $request) {
-        $supports = $this->service->getAll($request->filter);
+        $supports = $this->service->paginate(
+            $request->get("page",1),
+            $request->get('per_page', 15),
+            $request->filter
+        );
         return view('admin.supports.index', compact('supports'));
     }
     public function create() {
