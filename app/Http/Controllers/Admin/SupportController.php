@@ -2,48 +2,48 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTO\CreateSupportDTO;
+use App\DTO\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupportRequest;
-use App\Models\Support;
+use App\Services\SupportService;
 use Illuminate\Http\Request;
 
 class SupportController extends Controller
 {
-    public function index() {
-        $supports = Support::all();
+    public function __construct(private SupportService $service) {}
+    public function index(Request $request) {
+        $supports = $this->service->getAll($request->filter);
         return view('admin.supports.index', compact('supports'));
     }
     public function create() {
         return view('admin.supports.create');
     }
     public function store(StoreUpdateSupportRequest $request) {
-        Support::create($request->all());
+        $this->service->create(CreateSupportDTO::fromRequest($request));
         return to_route('supports.index');
     }
-    public function update(StoreUpdateSupportRequest $request, int $id) {
-        if(!$support = Support::find($id)) {
+    public function update(StoreUpdateSupportRequest $request) {
+        $support = $this->service->update(UpdateSupportDTO::fromRequest($request));
+        if(!$support) {
             return back();
         }
-        $support->update($request->all());
         return to_route('supports.index');
     }
     public function show(int $id) {
-        if(!$support = Support::find($id)) {
+        if(!$support = $this->service->getById($id)) {
             return back();
         }
         return view('admin.supports.show', compact('support'));
     }
     public function edit(int $id) {
-        if(!$support = Support::find($id)) {
+        if(!$support = $this->service->getById($id)) {
             return back();
         }
         return view('admin.supports.edit', compact('support'));
     }
     public function destroy(int $id) {
-        if(!$support = Support::find($id)) {
-            return back();
-        }
-        $support->delete();
+        $this->service->delete($id);
         return to_route('supports.index');
     }
 }
