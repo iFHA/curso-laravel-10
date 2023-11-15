@@ -15,7 +15,7 @@ class SupportController extends Controller
     public function index(Request $request) {
         $supports = $this->service->paginate(
             $request->get("page",1),
-            $request->get('per_page', 1),
+            $request->get('per_page', 10),
             $request->filter
         );
         $filters = [
