@@ -11,7 +11,7 @@ class UpdateSupportDTO {
         public string $body,
         public SupportStatus $status
     ) {}
-    public static function fromRequest(Request $request): UpdateSupportDTO {
-        return new self($request->id, $request->subject, $request->body, SupportStatus::ABERTO);
+    public static function fromRequest(Request $request, int $id = null): UpdateSupportDTO {
+        return new self($id ?? $request->id, $request->subject, $request->body, SupportStatus::ABERTO);
     }
 }
