@@ -1,6 +1,6 @@
 @extends("admin.layouts.app", ['title'=>'Listagem dos Suportes'])
 @section("header")
-<h1>Listagem dos Suportes</h1>
+@include('admin.supports.partials.header', compact('supports', 'filters'))
 @endsection
 @section("content")
 <a href="{{ route('supports.create') }}">Criar Dúvida</a>
