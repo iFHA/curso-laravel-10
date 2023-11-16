@@ -28,14 +28,14 @@ class SupportController extends Controller
     }
     public function store(StoreUpdateSupportRequest $request) {
         $this->service->create(CreateSupportDTO::fromRequest($request));
-        return to_route('supports.index');
+        return to_route('supports.index')->with('message', 'Dúvida cadastrada com sucessso!');
     }
     public function update(StoreUpdateSupportRequest $request) {
         $support = $this->service->update(UpdateSupportDTO::fromRequest($request));
         if(!$support) {
             return back();
         }
-        return to_route('supports.index');
+        return to_route('supports.index')->with('message', 'Dúvida '.$request->id.' alterada com sucessso!');;
     }
     public function show(int $id) {
         if(!$support = $this->service->getById($id)) {
@@ -51,6 +51,6 @@ class SupportController extends Controller
     }
     public function destroy(int $id) {
         $this->service->delete($id);
-        return to_route('supports.index');
+        return to_route('supports.index')->with('message', "Dúvida $id deletada com sucessso!");
     }
 }
