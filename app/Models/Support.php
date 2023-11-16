@@ -11,11 +11,13 @@ class Support extends Model
 {
     use HasFactory;
     protected $fillable = ['subject', 'body', 'status'];
-
+    protected $appends = ['statusDescription'];
     public function status(): Attribute {
         return Attribute::make(
-            get: fn($status) => SupportStatus::tryFrom($status)->getDescription(),
             set: fn(SupportStatus $status) => $status->value
         );
+    }
+    public function getStatusDescriptionAttribute(): string {
+        return SupportStatus::tryFrom($this->status)->getDescription();
     }
 }
