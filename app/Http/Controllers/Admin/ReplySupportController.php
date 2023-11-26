@@ -10,7 +10,7 @@ class ReplySupportController extends Controller
 {
     public function __construct(private SupportService $service) {}
 
-    public function index(int $id) {
+    public function index(string $id) {
         if(!$support = $this->service->getById($id)) {
             return back();
         }

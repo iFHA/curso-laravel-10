@@ -17,7 +17,7 @@ class SupportService {
     public function paginate(int $page = 1, int $perPage = 15, string $filter = null): PaginationInterface {
         return $this->repository->paginate($page, $perPage, $filter);
     }
-    public function getById($id): stdClass|null {
+    public function getById(string $id): stdClass|null {
         return $this->repository->getById($id);
     }
     public function create(CreateSupportDTO $dto): stdClass {
@@ -26,7 +26,7 @@ class SupportService {
     public function update(UpdateSupportDTO $dto): stdClass|null {
         return $this->repository->update($dto);
     }
-    public function delete(int $id): void {
+    public function delete(string $id): void {
         $this->repository->delete($id);
     }
 }

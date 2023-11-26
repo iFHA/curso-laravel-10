@@ -21,7 +21,7 @@ class SupportEloquentORMRepository implements SupportRepository {
                     ->get()
                     ->toArray();
     }
-    public function getById(int $id): stdClass|null {
+    public function getById(string $id): stdClass|null {
         $support = $this->model->find($id);
         if(!$support) {
             return null;
@@ -40,7 +40,7 @@ class SupportEloquentORMRepository implements SupportRepository {
         $support->update((array) $data);
         return (object) $support->toArray();
     }
-    public function delete(int $id): void {
+    public function delete(string $id): void {
         $this->model->findOrFail($id)->delete();
     }
 

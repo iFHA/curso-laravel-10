@@ -37,19 +37,19 @@ class SupportController extends Controller
         }
         return to_route('supports.index')->with('message', 'Dúvida '.$request->id.' alterada com sucessso!');;
     }
-    public function show(int $id) {
+    public function show(string $id) {
         if(!$support = $this->service->getById($id)) {
             return back();
         }
         return view('admin.supports.show', compact('support'));
     }
-    public function edit(int $id) {
+    public function edit(string $id) {
         if(!$support = $this->service->getById($id)) {
             return back();
         }
         return view('admin.supports.edit', compact('support'));
     }
-    public function destroy(int $id) {
+    public function destroy(string $id) {
         $this->service->delete($id);
         return to_route('supports.index')->with('message', "Dúvida $id deletada com sucessso!");
     }

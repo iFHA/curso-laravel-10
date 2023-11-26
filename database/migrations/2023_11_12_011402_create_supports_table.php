@@ -14,11 +14,14 @@ return new class extends Migration
     {
         Schema::create('supports', function (Blueprint $table) {
             $status = array_column(SupportStatus::cases(), 'value');
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->string('subject');
             $table->enum('status', $status)->default(SupportStatus::ABERTO);
             $table->text('body');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
