@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DTO\Supports\Replies\CreateReplyDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreReplySupportRequest;
 use App\Services\ReplySupportService;
 use App\Services\SupportService;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ReplySupportController extends Controller
         return view('admin.supports.replies.index', compact('support', 'replies'));
     }
 
-    public function store(Request $request) {
+    public function store(StoreReplySupportRequest $request) {
         $this->replySupportService->create(CreateReplyDTO::fromRequest($request));
         return to_route('replies.index', $request->id)->with('message', 'Resposta inserida com sucesso!');
     }

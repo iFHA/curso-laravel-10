@@ -1,8 +1,8 @@
 @extends('admin.layouts.app', ['title' => "Detalhes da dúvida $support->id"])
 @section("content")
-
 <div class="flex justify-center min-h-screen">
     <div class="md:w-3/5 w-3/4 px-10 flex flex-col gap-2 p-5">
+        <x-alert />
         <div class="flex justify-between">
             <h1 class="text-lg">Detalhes da Dúvida <b>{{ $support->subject }}</b></h1>
             {{-- @can('owner', $support->user['id']) --}}

@@ -17,7 +17,12 @@ class ReplySupportEloquentORMRepository implements ReplySupportRepository {
         return (object) $reply->toArray();
     }
 
-    public function delete(string $id): void {
-        $this->model->destroy($id);
+    public function delete(string $id): bool {
+        $reply = $this->model->find($id);
+        if($reply) {
+            $reply->delete();
+            return true;
+        }
+        return false;
     }
 }
