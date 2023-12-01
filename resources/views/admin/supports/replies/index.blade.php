@@ -21,27 +21,24 @@
         <!-- Item Container -->
         <div class="flex flex-col gap-3 text-white">
 
-            {{-- @forelse ($replies as $reply) --}}
+            @forelse ($replies as $reply)
                 <div class="flex flex-col gap-4 bg-gray-900 rounded p-4">
                     <!-- Profile and Rating -->
                     <div class="flex justify justify-between">
                         <div class="flex gap-2">
                             <div class="w-7 h-7 text-center rounded-full bg-red-500">CF</div>
-                            <span>replyusername</span>
-                            {{-- <span>{{ $reply['user']['name'] }}relyusername</span> --}}
+                            <span>{{ $reply['user']['name'] }}</span>
                         </div>
                     </div>
 
                     <div>
-                        {{-- {{ $reply['content'] }} --}} conteudo da resposta
+                        {{ $reply['content'] }}
                     </div>
 
                     <div class="flex justify-between">
-                        <span>createdat</span>
-                        {{-- <span>{{ $reply['created_at'] }}createdat</span> --}}
+                        <span>{{ $reply['created_at'] }}</span>
                         {{-- @can('owner', $reply['user']['id']) --}}
-                            <form action="" method="post">
-                            {{-- <form action="{{ route('replies.destroy', [$support->id, $reply['id']]) }}" method="post"> --}}
+                            <form action="{{ route('replies.destroy', [$support->id, $reply['id']]) }}" method="post">
                                 @csrf()
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 hover:bg-red-400 text-white py-1 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Deletar</button>
@@ -51,13 +48,12 @@
                         {{-- @endcan --}}
                     </div>
                 </div>
-            {{-- @empty --}}
-                {{-- <p>No replies</p> --}}
-            {{-- @endforelse --}}
+            @empty
+                <p>Nenhuma resposta até o momento</p>
+            @endforelse
 
             <div class="py-4">
-                <form action="" method="post">
-                {{-- <form action="{{ route('replies.store', $support->id) }}" method="post"> --}}
+                <form action="{{ route('replies.store', ['id' => $support->id]) }}" method="post">
                     @csrf
                     <input type="hidden" name="support_id" value="{{ $support->id }}">
                     <textarea

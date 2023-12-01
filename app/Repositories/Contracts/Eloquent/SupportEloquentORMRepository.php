@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Contracts\Eloquent;
 
 use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
 use App\Models\Support;
+use App\Repositories\Contracts\PaginationInterface;
+use App\Repositories\Contracts\SupportRepository;
+use App\Repositories\PaginationPresenter;
 use stdClass;
 
 class SupportEloquentORMRepository implements SupportRepository {
