@@ -25,7 +25,7 @@ class ReplySupportService {
     public function delete(string $id): bool {
         $reply = $this->repository->getById($id);
         if(!$reply) {
-            throw new NotFoundResourceException('Resposta não encontrada');
+            throw new NotFoundResourceException("Resposta '$id' não encontrada");
         }
         if(Gate::denies('owner', $reply->user['id'])) {
             abort(403, 'Não Autorizado');
