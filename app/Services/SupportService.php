@@ -26,7 +26,8 @@ class SupportService {
         return $this->repository->create($dto);
     }
     public function update(UpdateSupportDTO $dto): stdClass|null {
-        if(Gate::denies('owner', $dto->id)) {
+        $support = $this->repository->getById($dto->id);
+        if(Gate::denies('owner', $support->user_id)) {
             abort(403, 'Não Autorizado');
         }
         return $this->repository->update($dto);
@@ -35,7 +36,8 @@ class SupportService {
         $this->repository->updateStatus($id, $status);
     }
     public function delete(string $id): void {
-        if(Gate::denies('owner', $id)) {
+        $support = $this->repository->getById($id);
+        if(Gate::denies('owner', $support->user_id)) {
             abort(403, 'Não Autorizado');
         }
         $this->repository->delete($id);
