@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
+use App\Enums\SupportStatus;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\SupportRepository;
 use Illuminate\Support\Facades\Gate;
@@ -29,6 +30,9 @@ class SupportService {
             abort(403, 'Não Autorizado');
         }
         return $this->repository->update($dto);
+    }
+    public function updateStatus(string $id, SupportStatus $status) {
+        $this->repository->updateStatus($id, $status);
     }
     public function delete(string $id): void {
         if(Gate::denies('owner', $id)) {

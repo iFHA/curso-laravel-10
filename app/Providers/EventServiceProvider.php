@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\SupportReplied;
 use App\Listeners\SendMailWhenSupportReplied;
+use App\Listeners\UpdateStatusWhenSupportReplied;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -21,7 +22,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         SupportReplied::class => [
-            SendMailWhenSupportReplied::class
+            SendMailWhenSupportReplied::class,
+            UpdateStatusWhenSupportReplied::class
         ]
     ];
 

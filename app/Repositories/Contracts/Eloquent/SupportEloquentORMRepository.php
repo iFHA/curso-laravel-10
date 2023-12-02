@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts\Eloquent;
 
 use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
+use App\Enums\SupportStatus;
 use App\Models\Support;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\SupportRepository;
@@ -43,6 +44,15 @@ class SupportEloquentORMRepository implements SupportRepository {
         }
         $support->update((array) $data);
         return (object) $support->toArray();
+    }
+
+    public function updateStatus(string $id, SupportStatus $status): void {
+        $support = $this->model->find($id);
+        if(!$support) {
+            return;
+        }
+        $support->status = $status;
+        $support->save();
     }
     public function delete(string $id): void {
         $this->model->findOrFail($id)->delete();

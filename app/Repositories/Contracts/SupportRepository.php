@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts;
 
 use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
+use App\Enums\SupportStatus;
 use stdClass;
 
 interface SupportRepository {
@@ -12,5 +13,6 @@ interface SupportRepository {
     public function getById(string $id): stdClass|null;
     public function create(CreateSupportDTO $data): stdClass;
     public function update(UpdateSupportDTO $data): stdClass|null;
+    public function updateStatus(string $id, SupportStatus $status): void;
     public function delete(string $id): void;
 }
