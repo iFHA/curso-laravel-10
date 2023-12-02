@@ -62,11 +62,11 @@ composer install
 Gere a key do projeto Laravel
 ```sh
 php artisan key:generate
+``````
 
 Rode as migrations
 ```sh
 php artisan migrate
-
 ```
 
 Acesse o projeto
