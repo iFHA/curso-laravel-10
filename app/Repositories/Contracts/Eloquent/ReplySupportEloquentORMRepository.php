@@ -11,9 +11,17 @@ class ReplySupportEloquentORMRepository implements ReplySupportRepository {
     public function getAllBySupportId(string $id): array {
         return $this->model->where('support_id', $id)->with('user')->get()->toArray();
     }
+    public function getById(string $id): stdClass|null {
+        $reply = $this->model->with('user')->find($id);
+        if(!$reply) {
+            return null;
+        }
+        return (object) $reply->toArray();
+    }
 
     public function create(CreateReplyDTO $dto): stdClass {
         $reply = $this->model->create((array) $dto);
+        $reply->load('support');
         return (object) $reply->toArray();
     }
 

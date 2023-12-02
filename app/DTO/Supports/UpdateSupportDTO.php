@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 class UpdateSupportDTO {
     public function __construct(
-        public int $id,
+        public string $id,
         public string $subject,
         public string $body,
         public SupportStatus $status
     ) {}
-    public static function fromRequest(Request $request, int $id = null): UpdateSupportDTO {
+    public static function fromRequest(Request $request, string $id = null): UpdateSupportDTO {
         return new self($id ?? $request->id, $request->subject, $request->body, SupportStatus::ABERTO);
     }
 }

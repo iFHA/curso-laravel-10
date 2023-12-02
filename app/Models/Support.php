@@ -15,6 +15,7 @@ class Support extends Model
     use HasFactory, HasUuids;
     protected $fillable = ['subject', 'body', 'status'];
     protected $appends = ['statusDescription'];
+    protected $with = ['user'];
     public function status(): Attribute {
         return Attribute::make(
             set: fn(SupportStatus $status) => $status->value

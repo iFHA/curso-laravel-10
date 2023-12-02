@@ -6,6 +6,7 @@ use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\SupportRepository;
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class SupportService {
@@ -24,9 +25,15 @@ class SupportService {
         return $this->repository->create($dto);
     }
     public function update(UpdateSupportDTO $dto): stdClass|null {
+        if(Gate::denies('owner', $dto->id)) {
+            abort(403, 'Não Autorizado');
+        }
         return $this->repository->update($dto);
     }
     public function delete(string $id): void {
+        if(Gate::denies('owner', $id)) {
+            abort(403, 'Não Autorizado');
+        }
         $this->repository->delete($id);
     }
 }

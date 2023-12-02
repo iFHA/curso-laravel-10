@@ -15,6 +15,7 @@ class SupportEloquentORMRepository implements SupportRepository {
 
     public function getAll(string $filter = null): array {
         return $this->model
+                    ->with('replies')
                     ->where(function($query) use ($filter) {
                         if($filter) {
                             $query->where('subject', $filter);
@@ -25,7 +26,7 @@ class SupportEloquentORMRepository implements SupportRepository {
                     ->toArray();
     }
     public function getById(string $id): stdClass|null {
-        $support = $this->model->find($id);
+        $support = $this->model->with('user')->find($id);
         if(!$support) {
             return null;
         }
@@ -49,6 +50,7 @@ class SupportEloquentORMRepository implements SupportRepository {
 
     public function paginate(int $page = 1, int $perPage = 15, $filter = null): PaginationInterface {
         $result = $this->model
+                    ->with('replies')
                     ->where(function($query) use ($filter) {
                         if($filter) {
                             $query->where('subject', 'like','%'. $filter .'%');
