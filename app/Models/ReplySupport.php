@@ -14,7 +14,7 @@ class ReplySupport extends Model
     use HasFactory, HasUuids;
     protected $table = 'replies_support';
     protected $fillable = ['content', 'support_id', 'user_id'];
-    protected $with = ['user', 'support'];
+    protected $with = ['user'];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
