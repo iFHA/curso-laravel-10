@@ -1,6 +1,6 @@
 # Prática do Curso GRATUITO de Laravel 10.x da EspecializaTI no YouTube
 
-- :movie_camera: [Acessar o Curso](https://www.youtube.com/playlist?list=PLVSNL1PHDWvQ1N6fqhQ5HQzFtN-xrkjNU){:target="_blank"}.
+- :movie_camera: [Acessar o Curso](https://www.youtube.com/playlist?list=PLVSNL1PHDWvQ1N6fqhQ5HQzFtN-xrkjNU).
 
 ## Passo a passo para rodar o projeto
 
@@ -75,4 +75,4 @@ npm run dev
 ```
 
 Acesse o projeto
-[http://localhost:8989](http://localhost:8989){:target="_blank"}
+[http://localhost:8989](http://localhost:8989)
