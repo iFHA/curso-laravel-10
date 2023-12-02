@@ -50,7 +50,10 @@ class SupportEloquentORMRepository implements SupportRepository {
 
     public function paginate(int $page = 1, int $perPage = 15, $filter = null): PaginationInterface {
         $result = $this->model
-                    ->with('replies')
+                    ->with(['replies' => function($query) {
+                        $query->limit(4);
+                        $query->latest();
+                    }])
                     ->where(function($query) use ($filter) {
                         if($filter) {
                             $query->where('subject', 'like','%'. $filter .'%');
