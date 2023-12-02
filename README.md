@@ -56,6 +56,7 @@ docker-compose exec app bash
 Instale as dependências do projeto
 ```sh
 composer install
+npm install
 ```
 
 
@@ -67,6 +68,11 @@ php artisan key:generate
 Rode as migrations
 ```sh
 php artisan migrate
+```
+
+Execute o npm run dev
+```sh
+npm run dev
 ```
 
 Acesse o projeto
