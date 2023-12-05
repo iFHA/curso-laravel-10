@@ -45,8 +45,9 @@ COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 COPY docker/start.sh /usr/local/bin/start
 
-RUN chmod u+x /usr/local/bin/start \
-    && a2enmod rewrite
+COPY .env.example .env
+
+RUN chmod u+x /usr/local/bin/start
 
 RUN composer install
 
