@@ -43,4 +43,19 @@ WORKDIR /var/www
 # Copy custom configurations PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
+COPY docker/start.sh /usr/local/bin/start
+
+RUN chmod u+x /usr/local/bin/start \
+    && a2enmod rewrite
+
+RUN composer install
+
+RUN npm install
+
+RUN php artisan key:generate
+
+RUN php artisan migrate
+
 USER $user
+
+CMD ["/usr/local/bin/start"]
