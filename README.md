@@ -69,11 +69,8 @@ Rode as migrations
 php artisan migrate
 ```
 
-Execute o npm run dev
-```sh
-npm run dev
-```
-
 <a href="http://localhost:8989" target="_blank">
     Acesse o projeto
 </a>
+
+OBS: Nesse projeto fiz 2 containers extras a partir da imagem principal(app), sendo eles o container "fila" e o container "vite", o primeiro fica responsável por processar a fila do projeto, e o segundo fica responsável por executar o vite para que haja o hot-reload, portanto, pode ser que ao executar o último comando listado acima(php artisan migrate) algum desses 2 containers esteja sendo reiniciado, se for esse o caso, basta aguardar que todos os containers estejam com o status "Up" para que a aplicação esteja de fato pronta para uso, para verificar o status pode ser utilizado o comando "docker-compose ps".
