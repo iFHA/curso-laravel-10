@@ -83,7 +83,12 @@ services:
         image: redis:latest
         networks:
             - laravel
+        volumes:
+            - redis:/data
 
 networks:
     laravel:
         driver: bridge
+volumes:
+  redis:
+    driver: "local"
