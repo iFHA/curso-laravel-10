@@ -49,14 +49,6 @@ COPY .env.example .env
 
 RUN chmod u+x /usr/local/bin/start
 
-RUN composer install
-
-RUN npm install
-
-RUN php artisan key:generate
-
-RUN php artisan migrate
-
 USER $user
 
 CMD ["/usr/local/bin/start"]
